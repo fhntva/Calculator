@@ -223,6 +223,7 @@ fun comaReview(string: String): Boolean {
     for (char in string) {
         if (char == '.') {
             check = true
+            charQuant++
         }
     }
     if (charQuant == 1) {
