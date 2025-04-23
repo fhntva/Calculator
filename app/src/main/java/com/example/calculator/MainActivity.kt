@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     string = string + number
                     text.text = string
                 }
-                            }
+            }
 
             binding.BTNmunisone.setOnClickListener {
                 string = string.dropLast(1)
@@ -94,61 +94,41 @@ class MainActivity : AppCompatActivity() {
 
             binding.BTNMinus.setOnClickListener {
                 var review = review(string)
-                var sumReview = sumReview(string)
                 if (review == false) {
                     var number: String = "-"
                     string = string + number
                     text.text = string
-                }
-                if (sumReview == true) {
-                    var ret = calc(string)
-                    text.text = ret
                 }
 
 
             }
             binding.BTNPlus.setOnClickListener {
                 var review = review(string)
-                var sumReview = sumReview(string)
                 if (review == false) {
                     var number: String = "+"
                     string = string + number
                     text.text = string
 
                 }
-                if (sumReview == true) {
-                    var ret = calc(string)
-                    text.text = ret
-                }
 
 
             }
             binding.BTNMultiplication.setOnClickListener {
                 var review = review(string)
-                var sumReview = sumReview(string)
                 if (review == false) {
                     var number: String = "*"
                     string = string + number
                     text.text = string
-                }
-                if (sumReview == true) {
-                    var ret = calc(string)
-                    text.text = ret
                 }
 
 
             }
             binding.BTNDivision.setOnClickListener {
                 var review = review(string)
-                var sumReview = sumReview(string)
                 if (review == false) {
                     var number: String = "/"
                     string = string + number
                     text.text = string
-                }
-                if (sumReview == true) {
-                    var ret = calc(string)
-                    text.text = ret
                 }
 
             }
@@ -217,23 +197,40 @@ fun calc(string: String): String {
 
 
 fun review(string: String): Boolean {
-
+    var charQuant = 0
     var check = false
     for (char in string) {
         if (char == '-' || char == '+' || char == '*' || char == '/') {
-            check = true
+            charQuant++
+
         }
+
+    }
+    if (charQuant == 1) {
+
+        check = true
+    }
+    if (charQuant >= 2) {
+        check == false
     }
     return check
 
 }
 
 fun comaReview(string: String): Boolean {
+    var charQuant = 0
     var check = false
     for (char in string) {
         if (char == '.') {
             check = true
         }
+    }
+    if (charQuant == 1) {
+
+        check = true
+    }
+    if (charQuant >= 2) {
+        check == false
     }
     return check
 }
@@ -243,8 +240,7 @@ fun sumReview(string: String): Boolean {
     var digit = ""
     var runner = 0
     var lastChar = string.lastIndex.toString()
-    var ret = ""
-    var SumReview = false
+    var sumReview = false
     for (character in string) {
 
         if (character.isDigit() || character == '.') {
@@ -263,7 +259,14 @@ fun sumReview(string: String): Boolean {
     }
 
     if (list.size.toString() == "3") {
-        SumReview = true
+        sumReview = true
     }
-    return SumReview
+    if (list.size.toString() == "2") {
+        sumReview = false
+    }
+    if (list.size.toString() == "1") {
+        sumReview = false
+    }
+
+    return sumReview
 }
