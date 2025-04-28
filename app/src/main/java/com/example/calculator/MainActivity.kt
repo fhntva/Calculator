@@ -219,20 +219,32 @@ fun review(string: String): Boolean {
 
 fun comaReview(string: String): Boolean {
     var charQuant = 0
+    var arithmeticSumbols = 0
     var check = false
     for (char in string) {
+
+        if (char == '/' || char == '*' || char == '-' || char == '+') {
+            arithmeticSumbols++
+        }
+
         if (char == '.') {
             check = true
             charQuant++
         }
     }
+    if (arithmeticSumbols >= 1) {
+        check = true
+    }
+    if (arithmeticSumbols == 1 && charQuant == 1) {
+        check = true
+    }
     if (charQuant == 1) {
-
         check = true
     }
     if (charQuant >= 2) {
-        check == false
+        check = true
     }
+
     return check
 }
 
@@ -254,11 +266,15 @@ fun sumReview(string: String): Boolean {
         }
 
         if (runner.toString() == lastChar) {
-            list.add(digit.toFloat())
+
+            if (digit == "") {
+                break
+            }
+
+            list.add(digit)
         }
         runner++
     }
-
     if (list.size.toString() == "3") {
         sumReview = true
     }
